@@ -32,20 +32,25 @@ import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
 export class AddCommentComponent {
   @Input() userList: User[] = [];
   @Output() commentAdded: EventEmitter<string> = new EventEmitter<string>();
+
   private filteredUserList: User[] = [...this.userList];
   private showUserListBs: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   public showUserList$: Observable<boolean> =
     this.showUserListBs.asObservable();
+
   private keyboardSelectedResultBs: BehaviorSubject<number> =
     new BehaviorSubject<number>(-1);
   public keyboardSelectedResult$: Observable<number> =
     this.keyboardSelectedResultBs.asObservable();
+
   public commentForm = this._fb.group({
     commentText: ['', [Validators.required]],
   });
+
   @ViewChild('commentInput', { static: true })
   commentInput!: ElementRef<HTMLInputElement>;
+
   public userList$ = this.commentForm.controls.commentText.valueChanges.pipe(
     startWith(''),
     map((commentText) => {
