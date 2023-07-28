@@ -9,25 +9,25 @@ You can run the app and interact with it in the browser, as well as view/run the
 To run the app:
 
 ```sh
-nx serve limble-demo --open
+npm run start:open
 ```
 
 To run the unit tests:
 
 ```sh
-nx run-many --target test
+npm run unit-tests
 ```
 
 To run the Cypress tests:
 
 ```sh
-nx e2e limble-demo-e2e
+npm run e2e-tests
 ```
 
 To run the Cypress tests in interactive mode:
 
 ```sh
-nx e2e limble-demo-e2e --watch
+npm run e2e-tests:watch
 ```
 
 A Cypress window should pop up, and you should be able to run the tests in a browser and watch them run.
