@@ -1,21 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommentsListComponent } from './comments-list.component';
 
 describe('CommentsListComponent', () => {
   let component: CommentsListComponent;
-  let fixture: ComponentFixture<CommentsListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CommentsListComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CommentsListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    component = new CommentsListComponent();
+    jest
+      .spyOn(window, 'alert')
+      .mockImplementation(() => console.log('alert called'));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should not call the alert if a user is not mentioned', () => {
+    component.userList = [{ name: 'Test', userID: 1 }];
+
+    component.checkForUserMention('@Testing');
+
+    expect(window.alert).not.toHaveBeenCalled();
+  });
+
+  it('should call the alert if a user is mentioned', () => {
+    component.userList = [{ name: 'Test', userID: 1 }];
+
+    component.checkForUserMention('@Test');
+
+    expect(window.alert).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith('Test was mentioned');
   });
 });

@@ -1,18 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { AddCommentComponent } from './add-comment.component';
 
 describe('AddCommentComponent', () => {
   let component: AddCommentComponent;
-  let fixture: ComponentFixture<AddCommentComponent>;
+  const mockFormBuilder = new FormBuilder();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AddCommentComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(AddCommentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    component = new AddCommentComponent(mockFormBuilder);
+    component.userList = [{ name: 'Test', userID: 1 }];
   });
 
   it('should create', () => {

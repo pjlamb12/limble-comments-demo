@@ -1,21 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommentDisplayComponent } from './comment-display.component';
 
 describe('CommentDisplayComponent', () => {
   let component: CommentDisplayComponent;
-  let fixture: ComponentFixture<CommentDisplayComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CommentDisplayComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CommentDisplayComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    component = new CommentDisplayComponent();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should highlight the match correctly', () => {
+    component.userList = [{ name: 'Test', userID: 1 }];
+    component.comment = { message: '@Test' };
+
+    expect(component.formattedString).toEqual(
+      '<span class="mention-text">@Test</span>'
+    );
+  });
+
+  it('should not highlight the text if it has no match', () => {
+    component.userList = [{ name: 'Test', userID: 1 }];
+    component.comment = { message: '@Testing' };
+
+    expect(component.formattedString).toEqual('@Testing');
   });
 });

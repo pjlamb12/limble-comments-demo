@@ -40,9 +40,13 @@ export class CommentsListComponent {
   }
 
   checkForUserMention(commentText: string) {
+    const mentionsInCommentText = commentText
+      .split(/@(\S+)/g)
+      .filter((item) => item !== '');
+
     const mentionedUsers: string[] = this.userList
       .filter((user: User) => {
-        return commentText.includes(user.name);
+        return mentionsInCommentText.includes(user.name);
       })
       .map((user: User) => {
         return user.name;
