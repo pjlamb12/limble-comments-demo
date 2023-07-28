@@ -99,7 +99,7 @@ export class AddCommentComponent {
 
   atKeyPressedHandler() {
     this.showUserListBs.next(true);
-    if (this.filteredUserList.length) {
+    if (this.userList.length) {
       this.keyboardSelectedResultBs.next(0);
     }
   }
@@ -121,6 +121,7 @@ export class AddCommentComponent {
   }
 
   arrowKeyPressedHandler(direction: KeyCodes) {
+    console.log('an arrow key was pressed', direction);
     const currentKeyboardSelectedResult =
       this.keyboardSelectedResultBs.getValue();
     let nextKeyboardSelectedResult = currentKeyboardSelectedResult;
@@ -135,6 +136,8 @@ export class AddCommentComponent {
     ) {
       nextKeyboardSelectedResult = currentKeyboardSelectedResult + 1;
     }
+
+    console.log('next result', nextKeyboardSelectedResult);
 
     this.keyboardSelectedResultBs.next(nextKeyboardSelectedResult);
   }

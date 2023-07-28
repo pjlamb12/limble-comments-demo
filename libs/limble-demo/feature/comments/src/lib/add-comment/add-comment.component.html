@@ -1,6 +1,7 @@
 <form [formGroup]="commentForm">
   <div class="input-group">
     <input
+      data-cy="comment-input"
       type="text"
       formControlName="commentText"
       placeholder="New Comment"
@@ -11,9 +12,19 @@
       (enterKeyPressed)="enterKeyPressedHandler()"
       (escKeyPressed)="escKeyPressedHandler()"
     />
-    <button type="button" (click)="addCommentHandler()">Add</button>
+    <button
+      data-cy="add-comment-button"
+      type="button"
+      (click)="addCommentHandler()"
+    >
+      Add
+    </button>
   </div>
-  <ul class="user-list" *ngIf="showUserList$ | async">
+  <ul
+    class="user-list"
+    *ngIf="showUserList$ | async"
+    data-cy="mention-user-list"
+  >
     <ng-container *ngIf="{ kb: keyboardSelectedResult$ | async } as data">
       <li
         [class.selected]="data.kb === index"
