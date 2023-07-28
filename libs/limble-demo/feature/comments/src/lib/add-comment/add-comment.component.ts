@@ -32,6 +32,7 @@ import { BehaviorSubject, Observable, map, startWith } from 'rxjs';
 export class AddCommentComponent {
   @Input() userList: User[] = [];
   @Output() commentAdded: EventEmitter<string> = new EventEmitter<string>();
+  private filteredUserList: User[] = [...this.userList];
   private showUserListBs: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   public showUserList$: Observable<boolean> =
@@ -58,8 +59,12 @@ export class AddCommentComponent {
           this.keyboardSelectedResultBs.next(0);
         }
 
+        this.filteredUserList = [...filtered];
+
         return filtered;
       }
+
+      this.filteredUserList = [...this.userList];
 
       return this.userList;
     })
@@ -89,7 +94,7 @@ export class AddCommentComponent {
 
   atKeyPressedHandler() {
     this.showUserListBs.next(true);
-    if (this.userList.length) {
+    if (this.filteredUserList.length) {
       this.keyboardSelectedResultBs.next(0);
     }
   }
@@ -100,7 +105,9 @@ export class AddCommentComponent {
 
   enterKeyPressedHandler() {
     if (this.showUserListBs.value && this.keyboardSelectedResultBs.value > -1) {
-      this.selectUser(this.userList[this.keyboardSelectedResultBs.value]);
+      this.selectUser(
+        this.filteredUserList[this.keyboardSelectedResultBs.value]
+      );
       this.showUserListBs.next(false);
       this.keyboardSelectedResultBs.next(-1);
     } else {
@@ -113,7 +120,7 @@ export class AddCommentComponent {
       this.keyboardSelectedResultBs.getValue();
     let nextKeyboardSelectedResult = currentKeyboardSelectedResult;
 
-    const maxValue = this.userList.length - 1;
+    const maxValue = this.filteredUserList.length - 1;
 
     if (direction === KeyCodes.UP && currentKeyboardSelectedResult !== -1) {
       nextKeyboardSelectedResult = currentKeyboardSelectedResult - 1;
