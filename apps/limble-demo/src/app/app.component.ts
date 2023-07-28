@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { CommentsListComponent } from '@limble-demo/limble-demo/feature/comments';
 
 @Component({
-	standalone: true,
-	imports: [NxWelcomeComponent],
-	selector: 'limble-demo-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommentsListComponent],
+  selector: 'limble-demo-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-	title = 'limble-demo';
-}
+export class AppComponent {}

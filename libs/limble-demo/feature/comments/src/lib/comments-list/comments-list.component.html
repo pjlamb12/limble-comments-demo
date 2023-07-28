@@ -1,1 +1,12 @@
-<p>comments-list works!</p>
+<ul class="comments-list">
+  <li *ngFor="let comment of comments">
+    <ld-comment-display
+      [userList]="userList"
+      [comment]="comment"
+    ></ld-comment-display>
+  </li>
+</ul>
+<ld-add-comment
+  [userList]="userList"
+  (commentAdded)="addComment($any($event))"
+></ld-add-comment>

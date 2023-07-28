@@ -1,0 +1,10 @@
+.comments-list {
+  li {
+    border-top: 1px solid lightgray;
+    padding: 8px;
+
+    &:nth-child(1) {
+      border: none;
+    }
+  }
+}

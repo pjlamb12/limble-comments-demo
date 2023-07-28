@@ -1,1 +1,27 @@
-<p>add-comment works!</p>
+<form [formGroup]="commentForm">
+  <div class="input-group">
+    <input
+      type="text"
+      formControlName="commentText"
+      placeholder="New Comment"
+      #commentInput
+      ldKeyboardSelect
+      (atKeyPressed)="atKeyPressedHandler()"
+      (directionArrowPressed)="arrowKeyPressedHandler($event)"
+      (enterKeyPressed)="enterKeyPressedHandler()"
+      (escKeyPressed)="escKeyPressedHandler()"
+    />
+    <button type="button" (click)="addCommentHandler()">Add</button>
+  </div>
+  <ul class="user-list" *ngIf="showUserList$ | async">
+    <ng-container *ngIf="{ kb: keyboardSelectedResult$ | async } as data">
+      <li
+        [class.selected]="data.kb === index"
+        (click)="selectUser(user)"
+        *ngFor="let user of userList$ | async; let index = index"
+      >
+        {{ user.name }}
+      </li>
+    </ng-container>
+  </ul>
+</form>

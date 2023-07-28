@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: 'Arial';
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.mention-text {
+  font-weight: bold;
+}
